@@ -87,10 +87,11 @@ def test ():
     plt.plot(range(1,allBacklinkNum),entrophy1,'b^-')
     plt.plot(range(1,allBacklinkNum),entrophy2,'g^-')
     plt.show()
-
+'''
 pn = [13201,845,35756,12103,1204]
 apn = [350,20,541,124,44]
 
 pr0 = calcPR0(pn,apn)
 print(pr0)
 test()
+'''
