@@ -61,3 +61,4 @@ li2 = ['101','5']
 w=Edge.conceptToConcept(li,li2,20)
 w1=Edge(0)
 w2=Edge(0)
+w3=Edge(0)
