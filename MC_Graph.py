@@ -1,7 +1,3 @@
-
-
-
-
 from cmath import log10
 
 
