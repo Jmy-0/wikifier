@@ -17,12 +17,13 @@ class Edge:
     #global EntireSR
     EntireSR = 0
     def __init__(self, type):
-        self.P = -1
+        self.P = -1#전이확률, 가중치 역할
         self.SR = -1
         self.type = type#mention to concept(0) or concept to concept(1)
         print("type = %d"%(self.type))
+
     @classmethod
-    def conceptToConcept(cls,start_set:list,end_set:list, N:int):
+    def conceptToConcept(cls,start_set:list,end_set:list, N:int):#컨셉에서 컨셉으로 가는 간선의 생성자 역할
         temp = Edge(1)
         temp.calcSR(start_set,end_set,N)
         return temp
@@ -36,20 +37,23 @@ class Edge:
         return
     def calcSR(self,start_set, end_set, N):
         sameNum = 0
+        #리스트 순회하면서 같은 글자 찾아내는 부분
+        #더 효율적인 방법 있으면 그걸로 바꾸는게 좋을듯
         for i in start_set:
             for j in end_set:
                 if(i == j):
                     sameNum +=1
         
+        #list 사이즈 저장
         startLen = len(start_set)
         endLen = len(end_set)
 
+        #수식 계산
         denominator = (log10(N) - log10(min(startLen,endLen)))#분모
         numerator = (log10(max(startLen,endLen)) - log10(sameNum)) #분자
-
-
-        self.SR = 1- numerator / denominator
-        Edge.EntireSR += self.SR
+        
+        self.SR = 1- numerator / denominator#분모가 0인 경우가 발생할 수 있음. 예외처리 어떻게 할지 정해야 할듯
+        Edge.EntireSR += self.SR#다른계산을 하기 위해서 전체 SR의 합이 필요함
         print(Edge.EntireSR)
         return
 
