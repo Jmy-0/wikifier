@@ -60,6 +60,20 @@ class Edge:
     def printing(self):
         print(self.type)
 
+def calcEntrophy(allBacklinksNum, asAnchortextNum):#mention A 에 대한 entrophy를 구한다
+    #allBacklinksNum = A로 인해 발생한 concept후보들 각각의 전체 백링크 수
+    #asAnchortextNum = 위의 백링크들 중에서 앵커텍스트가 A인 링크개수
+
+    length = len(allBacklinksNum)#길이는 같은걸로 간주한다
+    sum=0
+    for i in range(length):
+        if(asAnchortextNum[i] == 0 or allBacklinksNum[i] == 0):#둘 중 하나라도 0이면 넘김
+            continue
+        temp = asAnchortextNum[i]/allBacklinksNum[i]
+        sum -= temp * log10(temp)
+
+    return sum
+    
 li = ['10','5']
 li2 = ['101','5']
 w=Edge.conceptToConcept(li,li2,20)
